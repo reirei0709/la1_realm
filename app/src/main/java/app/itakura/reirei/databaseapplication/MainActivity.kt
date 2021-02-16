@@ -18,16 +18,15 @@ class MainActivity : AppCompatActivity() {
         val memo:Memo? = read()
 
         if (memo != null){
-            titleEditText.setText(memo.title)
             contentEditText.setText(memo.content)
         }
 
         saveButton.setOnClickListener {
-            val title: String = titleEditText.text.toString()
             val content:String = contentEditText.text.toString()
-            save(title, content)
+            save(content)
 
             val intent = Intent(this, RecyclerViewActivity::class.java)
+            intent.putExtra("content", content.toString())
             startActivity(intent)
         }
     }
@@ -41,16 +40,14 @@ class MainActivity : AppCompatActivity() {
         return realm.where(Memo::class.java).findFirst()
     }
 
-    fun save(title: String, content: String){
+    fun save(content: String){
         val memo:Memo? = read()
 
         realm.executeTransaction {
             if (memo  != null){
-                memo.title = title
                 memo.content = content
             }else{
                 val newMemo:Memo = it.createObject(Memo::class.java)
-                newMemo.title = title
                 newMemo.content = content
             }
 
