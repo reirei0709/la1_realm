@@ -42,6 +42,8 @@ class RecyclerViewActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        adapter.addAll(memoList)
+
 
     }
 
