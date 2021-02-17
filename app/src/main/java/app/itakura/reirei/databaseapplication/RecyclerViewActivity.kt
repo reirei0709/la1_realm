@@ -31,9 +31,9 @@ class RecyclerViewActivity : AppCompatActivity() {
         // タスクリストが空だったときにダミーデータを生成する
         if (memoList.isEmpty()) {
             createDummyData()
-        }else{
+        }
+        else{
             create(content.toString())
-
         }
 
         val adapter = MemoListAdapter(this, memoList, true)
@@ -58,8 +58,8 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     fun create(content: String) {
         realm.executeTransaction {
-            val task = it.createObject(Memo::class.java, UUID.randomUUID().toString())
-            task.content = content
+            val memo = it.createObject(Memo::class.java, UUID.randomUUID().toString())
+            memo.content = content
         }
     }
 
